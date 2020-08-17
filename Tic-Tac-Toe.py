@@ -18,7 +18,7 @@ else:
 # Creating board
 board = {'7': ' ', '8': ' ', '9': ' ',
          '4': ' ', '5': ' ', '6': ' ',
-         '1': ' ', '2': ' ', '3': ' '}
+         '1': 'X', '2': 'X', '3': ' '}
 
 
 # Printing Board
@@ -30,18 +30,94 @@ def printboard(board):
     print(board['1'] + '|' + board['2'] + '|' + board['3'])
 
 
+move = 0
 while True:
     # ------  Player Chance -----
     if toss == 0:
         print("Current Board is :")
         printboard(board)
         print("Player's Chance", player_letter)
-        move = input("Enter the Position 1 - 9 : ")
-        if board[move] != " ":
+        # Checking if Player Wins with the Move
+        if (board['1'] == player_letter and board['2'] == player_letter and board['3'] == " ") or (
+                board['1'] == player_letter and board['2'] == " " and board['3'] == player_letter) or (
+                board['1'] == " " and board['2'] == player_letter and board['3'] == player_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['2'] == " ":
+                move = 2
+            else:
+                move = 3
+        elif (board['4'] == player_letter and board['5'] == player_letter and board['6'] == " ") or (
+                board['4'] == player_letter and board['5'] == " " and board['6'] == player_letter) or (
+                board['4'] == " " and board['5'] == player_letter and board['6'] == player_letter):
+            if board['4'] == " ":
+                move = 4
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 6
+        elif (board['7'] == player_letter and board['8'] == player_letter and board['9'] == " ") or (
+                board['7'] == player_letter and board['8'] == " " and board['9'] == player_letter) or (
+                board['7'] == " " and board['8'] == player_letter and board['9'] == player_letter):
+            if board['7'] == " ":
+                move = 7
+            elif board['8'] == " ":
+                move = 8
+            else:
+                move = 9
+        elif (board['1'] == player_letter and board['4'] == player_letter and board['7'] == " ") or (
+                board['1'] == player_letter and board['4'] == " " and board['7'] == player_letter) or (
+                board['1'] == " " and board['4'] == player_letter and board['7'] == player_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['4'] == " ":
+                move = 4
+            else:
+                move = 7
+        elif (board['2'] == player_letter and board['5'] == player_letter and board['8'] == " ") or (
+                board['2'] == player_letter and board['5'] == " " and board['8'] == player_letter) or (
+                board['2'] == " " and board['5'] == player_letter and board['8'] == player_letter):
+            if board['2'] == " ":
+                move = 2
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 8
+        elif (board['3'] == player_letter and board['6'] == player_letter and board['9'] == " ") or (
+                board['3'] == player_letter and board['6'] == " " and board['9'] == player_letter) or (
+                board['3'] == " " and board['6'] == player_letter and board['9'] == player_letter):
+            if board['3'] == " ":
+                move = 3
+            elif board['6'] == " ":
+                move = 6
+            else:
+                move = 9
+        elif (board['1'] == player_letter and board['5'] == player_letter and board['9'] == " ") or (
+                board['1'] == player_letter and board['5'] == " " and board['9'] == player_letter) or (
+                board['1'] == " " and board['5'] == player_letter and board['9'] == player_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 9
+        elif (board['3'] == player_letter and board['5'] == player_letter and board['7'] == " ") or (
+                board['3'] == player_letter and board['5'] == " " and board['7'] == player_letter) or (
+                board['3'] == " " and board['5'] == player_letter and board['7'] == player_letter):
+            if board['3'] == " ":
+                move = 3
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 7
+        else:
+            print("No Winning Condition")
+            move = input("Enter the Position 1 - 9 : ")
+        if board[str(move)] != " ":
             print("Position already Occupied")
             continue
         else:
-            board[move] = player_letter
+            board[str(move)] = player_letter
         # Checking for Game Status (Winner/Loss/Tie)
         if board['7'] == board['8'] == board['9'] != ' ':  # across the top
             if player_letter == board['7']:
@@ -102,12 +178,87 @@ while True:
         print("Current Board is :")
         printboard(board)
         print("Computer's Chance", computer_letter)
-        move = input("Enter the Position 1 - 9 : ")
-        if board[move] != " ":
+        # Checking if Player Wins with the Move
+        if (board['1'] == computer_letter and board['2'] == computer_letter and board['3'] == " ") or (
+                board['1'] == computer_letter and board['2'] == " " and board['3'] == computer_letter) or (
+                board['1'] == " " and board['2'] == computer_letter and board['3'] == computer_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['2'] == " ":
+                move = 2
+            else:
+                move = 3
+        elif (board['4'] == computer_letter and board['5'] == computer_letter and board['6'] == " ") or (
+                board['4'] == computer_letter and board['5'] == " " and board['6'] == computer_letter) or (
+                board['4'] == " " and board['5'] == computer_letter and board['6'] == computer_letter):
+            if board['4'] == " ":
+                move = 4
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 6
+        elif (board['7'] == computer_letter and board['8'] == computer_letter and board['9'] == " ") or (
+                board['7'] == computer_letter and board['8'] == " " and board['9'] == computer_letter) or (
+                board['7'] == " " and board['8'] == computer_letter and board['9'] == computer_letter):
+            if board['7'] == " ":
+                move = 7
+            elif board['8'] == " ":
+                move = 8
+            else:
+                move = 9
+        elif (board['1'] == computer_letter and board['4'] == computer_letter and board['7'] == " ") or (
+                board['1'] == computer_letter and board['4'] == " " and board['7'] == computer_letter) or (
+                board['1'] == " " and board['4'] == computer_letter and board['7'] == computer_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['4'] == " ":
+                move = 4
+            else:
+                move = 7
+        elif (board['2'] == computer_letter and board['5'] == computer_letter and board['8'] == " ") or (
+                board['2'] == computer_letter and board['5'] == " " and board['8'] == computer_letter) or (
+                board['2'] == " " and board['5'] == computer_letter and board['8'] == computer_letter):
+            if board['2'] == " ":
+                move = 2
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 8
+        elif (board['3'] == computer_letter and board['6'] == computer_letter and board['9'] == " ") or (
+                board['3'] == computer_letter and board['6'] == " " and board['9'] == computer_letter) or (
+                board['3'] == " " and board['6'] == computer_letter and board['9'] == computer_letter):
+            if board['3'] == " ":
+                move = 3
+            elif board['6'] == " ":
+                move = 6
+            else:
+                move = 9
+        elif (board['1'] == computer_letter and board['5'] == computer_letter and board['9'] == " ") or (
+                board['1'] == computer_letter and board['5'] == " " and board['9'] == computer_letter) or (
+                board['1'] == " " and board['5'] == computer_letter and board['9'] == computer_letter):
+            if board['1'] == " ":
+                move = 1
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 9
+        elif (board['3'] == computer_letter and board['5'] == computer_letter and board['7'] == " ") or (
+                board['3'] == computer_letter and board['5'] == " " and board['7'] == computer_letter) or (
+                board['3'] == " " and board['5'] == computer_letter and board['7'] == computer_letter):
+            if board['3'] == " ":
+                move = 3
+            elif board['5'] == " ":
+                move = 5
+            else:
+                move = 7
+        else:
+            print("No Winning Condition")
+            move = input("Enter the Position 1 - 9 : ")
+        if board[str(move)] != " ":
             print("Position already Occupied")
             continue
         else:
-            board[move] = computer_letter
+            board[str(move)] = computer_letter
         # Checking for Game Status (Winner/Loss/Tie)
         if board['7'] == board['8'] == board['9'] != ' ':  # across the top
             if computer_letter == board['7']:
