@@ -201,6 +201,8 @@ while True:
                 move = 7
             elif board['9'] == ' ':
                 move = 9
+            elif board['5'] == " ":  # middle Choice for player (Use Case_10)
+                move =5
 
         if board[str(move)] != " ":
             print("Position already Occupied")
@@ -432,6 +434,8 @@ while True:
                 move = 7
             elif board['9'] == ' ':
                 move = 9
+            elif board['5'] == " ":  # middle Choice for player (Use Case_10)
+                move =5
 
         if board[str(move)] != " ":
             print("Position already Occupied")
