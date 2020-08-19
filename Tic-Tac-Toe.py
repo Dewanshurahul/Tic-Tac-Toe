@@ -17,6 +17,31 @@ board = {'7': ' ', '8': ' ', '9': ' ',
 
 move = 0
 
+def status_horizontal():
+    for x in range(1, 8, 3):
+        if board[str(x)] == board[str(x+1)] == board[str(x+2)] != ' ':  # across the top
+            return x
+    return 0
+
+def status_vertical():
+    for x in range(1, 4):
+        if board[str(x)] == board[str(x+3)] == board[str(x+6)] != ' ':  # across the top
+            return x
+    return 0
+
+
+def status_diagonal_left():
+    if board[str(1)] == board[str(5)] == board[str(9)] != ' ':  # across the top
+            return 1
+    return 0
+
+
+def status_diagonal_right():
+    if board[str(3)] == board[str(5)] == board[str(7)] != ' ':  # across the top
+        return 3
+    return 0
+
+
 def player_win_move(player_letter):
     if (board['1'] == player_letter and board['2'] == player_letter and board['3'] == " ") or (
             board['1'] == player_letter and board['2'] == " " and board['3'] == player_letter) or (
@@ -131,31 +156,14 @@ while True:
 
         # Checking for Game Status (Winner/Loss/Tie)
         try:
-            if board['7'] == board['8'] == board['9'] != ' ':  # across the top
-                player_win_statement(7)
-                break
-            elif board['4'] == board['5'] == board['6'] != ' ':  # across the middle
-                player_win_statement(4)
-                break
-            elif board['1'] == board['2'] == board['3'] != ' ':  # across the bottom
-                player_win_statement(1)
-                break
-            elif board['1'] == board['4'] == board['7'] != ' ':  # down the left side
-                player_win_statement(1)
-                break
-            elif board['2'] == board['5'] == board['8'] != ' ':  # down the middle
-                player_win_statement(2)
-                break
-            elif board['3'] == board['6'] == board['9'] != ' ':  # down the right side
-                player_win_statement(3)
-                break
-            elif board['7'] == board['5'] == board['3'] != ' ':  # diagonal
-                player_win_statement(7)
-                break
-            elif board['1'] == board['5'] == board['9'] != ' ':  # diagonal
-                player_win_statement(1)
-                break
-
+            if status_horizontal() != 0:
+                player_win_statement(str(status_horizontal()))
+            elif status_vertical() != 0:
+                player_win_statement(str(status_vertical()))
+            elif status_diagonal_left() != 0:
+                player_win_statement(str(status_diagonal_left()))
+            elif status_diagonal_right() != 0:
+                player_win_statement(str(status_diagonal_right()))
             count += 1
             toss = 1
             continue
@@ -215,30 +223,20 @@ while True:
 
         # Checking for Game Status (Winner/Loss/Tie)
         try:
-            if board['7'] == board['8'] == board['9'] != ' ':  # across the top
-                player_win_statement(7)
+            if status_horizontal() != 0:
+                player_win_statement(str(status_horizontal()))
                 break
-            elif board['4'] == board['5'] == board['6'] != ' ':  # across the middle
-                player_win_statement(4)
+            elif status_vertical() != 0:
+                player_win_statement(str(status_vertical()))
                 break
-            elif board['1'] == board['2'] == board['3'] != ' ':  # across the bottom
-                player_win_statement(1)
+            elif status_diagonal_left() != 0:
+                player_win_statement(str(status_diagonal_left()))
                 break
-            elif board['1'] == board['4'] == board['7'] != ' ':  # down the left side
-                player_win_statement(1)
+            elif status_diagonal_right() != 0:
+                player_win_statement(str(status_diagonal_right()))
                 break
-            elif board['2'] == board['5'] == board['8'] != ' ':  # down the middle
-                player_win_statement(2)
-                break
-            elif board['3'] == board['6'] == board['9'] != ' ':  # down the right side
-                player_win_statement(3)
-                break
-            elif board['7'] == board['5'] == board['3'] != ' ':  # diagonal
-                player_win_statement(7)
-                break
-            elif board['1'] == board['5'] == board['9'] != ' ':  # diagonal
-                player_win_statement(1)
-                break
+            else:
+                print("0")
 
             count += 1
             toss = 0
