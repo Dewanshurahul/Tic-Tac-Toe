@@ -99,11 +99,6 @@ def player_win_statement(pindex):
     else:
         print("Computer Wins")
 
-def computer_win_statement(cindex):
-    if computer_letter == board[str(cindex)]:
-        print("Computer Wins")
-    else:
-        print("Player Wins")
 
 # Printing Board
 def printboard(board):
@@ -119,6 +114,7 @@ while True:
     if toss == 0:
         if count == 9:
             print("Game Ties.")
+            break
         move = 0
         print("Current Board is :")
         try:
@@ -220,28 +216,28 @@ while True:
         # Checking for Game Status (Winner/Loss/Tie)
         try:
             if board['7'] == board['8'] == board['9'] != ' ':  # across the top
-                computer_win_statement(7)
+                player_win_statement(7)
                 break
             elif board['4'] == board['5'] == board['6'] != ' ':  # across the middle
-                computer_win_statement(4)
+                player_win_statement(4)
                 break
             elif board['1'] == board['2'] == board['3'] != ' ':  # across the bottom
-                computer_win_statement(1)
+                player_win_statement(1)
                 break
             elif board['1'] == board['4'] == board['7'] != ' ':  # down the left side
-                computer_win_statement(1)
+                player_win_statement(1)
                 break
             elif board['2'] == board['5'] == board['8'] != ' ':  # down the middle
-                computer_win_statement(2)
+                player_win_statement(2)
                 break
             elif board['3'] == board['6'] == board['9'] != ' ':  # down the right side
-                computer_win_statement(3)
+                player_win_statement(3)
                 break
             elif board['7'] == board['5'] == board['3'] != ' ':  # diagonal
-                computer_win_statement(7)
+                player_win_statement(7)
                 break
             elif board['1'] == board['5'] == board['9'] != ' ':  # diagonal
-                computer_win_statement(1)
+                player_win_statement(1)
                 break
 
             count += 1
