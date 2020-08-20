@@ -18,15 +18,15 @@ board = {'7': ' ', '8': ' ', '9': ' ',
 move = 0
 
 def status_horizontal():
-    for x in range(1, 8, 3):
-        if board[str(x)] == board[str(x+1)] == board[str(x+2)] != ' ':  # across the top
-            return x
+    for position in range(1, 8, 3):
+        if board[str(position)] == board[str(position + 1)] == board[str(position + 2)] != ' ':  # across the top
+            return position
     return 0
 
 def status_vertical():
-    for x in range(1, 4):
-        if board[str(x)] == board[str(x+3)] == board[str(x+6)] != ' ':  # across the top
-            return x
+    for position in range(1, 4):
+        if board[str(position)] == board[str(position + 3)] == board[str(position + 6)] != ' ':  # across the top
+            return position
     return 0
 
 
@@ -42,62 +42,30 @@ def status_diagonal_right():
     return 0
 
 
-def player_win_move(player_letter):
-    if (board['1'] == player_letter and board['2'] == player_letter and board['3'] == " ") or (
-            board['1'] == player_letter and board['2'] == " " and board['3'] == player_letter) or (
-            board['1'] == " " and board['2'] == player_letter and board['3'] == player_letter):
-        if board['1'] == " ":
-            move = 1
-        elif board['2'] == " ":
-            move = 2
-        else:
-            move = 3
-    elif (board['4'] == player_letter and board['5'] == player_letter and board['6'] == " ") or (
-            board['4'] == player_letter and board['5'] == " " and board['6'] == player_letter) or (
-            board['4'] == " " and board['5'] == player_letter and board['6'] == player_letter):
-        if board['4'] == " ":
-            move = 4
-        elif board['5'] == " ":
-            move = 5
-        else:
-            move = 6
-    elif (board['7'] == player_letter and board['8'] == player_letter and board['9'] == " ") or (
-            board['7'] == player_letter and board['8'] == " " and board['9'] == player_letter) or (
-            board['7'] == " " and board['8'] == player_letter and board['9'] == player_letter):
-        if board['7'] == " ":
-            move = 7
-        elif board['8'] == " ":
-            move = 8
-        else:
-            move = 9
-    elif (board['1'] == player_letter and board['4'] == player_letter and board['7'] == " ") or (
-            board['1'] == player_letter and board['4'] == " " and board['7'] == player_letter) or (
-            board['1'] == " " and board['4'] == player_letter and board['7'] == player_letter):
-        if board['1'] == " ":
-            move = 1
-        elif board['4'] == " ":
-            move = 4
-        else:
-            move = 7
-    elif (board['2'] == player_letter and board['5'] == player_letter and board['8'] == " ") or (
-            board['2'] == player_letter and board['5'] == " " and board['8'] == player_letter) or (
-            board['2'] == " " and board['5'] == player_letter and board['8'] == player_letter):
-        if board['2'] == " ":
-            move = 2
-        elif board['5'] == " ":
-            move = 5
-        else:
-            move = 8
-    elif (board['3'] == player_letter and board['6'] == player_letter and board['9'] == " ") or (
-            board['3'] == player_letter and board['6'] == " " and board['9'] == player_letter) or (
-            board['3'] == " " and board['6'] == player_letter and board['9'] == player_letter):
-        if board['3'] == " ":
-            move = 3
-        elif board['6'] == " ":
-            move = 6
-        else:
-            move = 9
-    elif (board['1'] == player_letter and board['5'] == player_letter and board['9'] == " ") or (
+def player_win_move_vertical(player_letter):
+    for position in range(1, 4):
+        if (board[str(position)] == player_letter and board[str(position + 3)] == player_letter and board[str(position + 6)] == " ") or (
+                board[str(position)] == player_letter and board[str(position + 3)] == " " and board[str(position + 6)] == player_letter) or (
+                board[str(position)] == player_letter and board[str(position + 3)] == player_letter and board[str(position + 6)] == " "):
+            for horizontal_position in range(position, position + 7, 3):
+                if board[str(horizontal_position)] == " ":
+                    return horizontal_position
+    return 0
+
+
+def player_win_move_horizontal(player_letter):
+    for position in range(1, 8, 3):
+        if (board[str(position)] == player_letter and board[str(position + 1)] == player_letter and board[str(position + 2)] == " ") or (
+                board[str(position)] == player_letter and board[str(position + 1)] == " " and board[str(position + 2)] == player_letter) or (
+                board[str(position)] == player_letter and board[str(position + 1)] == player_letter and board[str(position + 2)] == " "):
+            for horizontal_position in range(position, position + 3):
+                if board[str(horizontal_position)] == " ":
+                    return horizontal_position
+    return 0
+
+
+def player_win_move_diagonal(player_letter):
+    if (board['1'] == player_letter and board['5'] == player_letter and board['9'] == " ") or (
             board['1'] == player_letter and board['5'] == " " and board['9'] == player_letter) or (
             board['1'] == " " and board['5'] == player_letter and board['9'] == player_letter):
         if board['1'] == " ":
@@ -169,7 +137,6 @@ while True:
             continue
         except:
             print("Error in Checking Game Status for Player")
-
     else:
         # ----- Computer Chance -----
         if count == 9:
@@ -183,14 +150,24 @@ while True:
 
         # Checking if Computer Wins with the Move
         try:
-            move = player_win_move(computer_letter)
+            if player_win_move_horizontal(computer_letter) != 0:
+                move = player_win_move_horizontal(computer_letter)
+            elif player_win_move_vertical(computer_letter) != 0:
+                move = player_win_move_vertical(computer_letter)
+            elif player_win_move_diagonal(computer_letter) != 0:
+                move = player_win_move_diagonal(computer_letter)
         except:
             print("Error in Checking Computer Winning Move")
 
         # Checking if Player(Opponent) Wins with the Move
         try:
             if move == 0:
-                move = player_win_move(player_letter)
+                if player_win_move_horizontal(player_letter) != 0:
+                    move = player_win_move_horizontal(player_letter)
+                elif player_win_move_vertical(player_letter) != 0:
+                    move = player_win_move_vertical(player_letter)
+                elif player_win_move_diagonal(player_letter) != 0:
+                    move = player_win_move_diagonal(player_letter)
         except:
             print("Error in Checking Player (Opponent) Winning Move")
 
