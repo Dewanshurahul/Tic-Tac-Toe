@@ -3,11 +3,14 @@ from random import randint
 print("Fresh start the Game.")
 letter = ['O', 'X']
 computer_letter = ''
-player_letter = letter[randint(0, 1)]  # Randomly Assigning Letter to Player
-if player_letter == 'X':
-    computer_letter = 'O'
-else:
-    computer_letter = 'X'
+def player_letter_assignment(letter):
+    return letter[randint(0, 1)]
+player_letter = player_letter_assignment(letter)  # Randomly Assigning Letter to Player
+def computer_letter_assignment(player_letter):
+    if player_letter == 'X':
+        return 'O'
+    return 'X'
+computer_letter = computer_letter_assignment(player_letter)
 toss = randint(0, 1)
 count = 0  # To count number of Turns
 # Creating board
@@ -126,12 +129,16 @@ while True:
         try:
             if status_horizontal() != 0:
                 player_win_statement(str(status_horizontal()))
+                break
             elif status_vertical() != 0:
                 player_win_statement(str(status_vertical()))
+                break
             elif status_diagonal_left() != 0:
                 player_win_statement(str(status_diagonal_left()))
+                break
             elif status_diagonal_right() != 0:
                 player_win_statement(str(status_diagonal_right()))
+                break
             count += 1
             toss = 1
             continue
@@ -212,8 +219,6 @@ while True:
             elif status_diagonal_right() != 0:
                 player_win_statement(str(status_diagonal_right()))
                 break
-            else:
-                print("0")
 
             count += 1
             toss = 0
