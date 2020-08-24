@@ -20,6 +20,12 @@ board = {'7': ' ', '8': ' ', '9': ' ',
 
 move = 0
 
+def validate_input(input):
+    if input in str([1,2,3,4,5,6,7,8,9]):
+        return True
+    return False
+
+
 def status_horizontal():
     for position in range(1, 8, 3):
         if board[str(position)] == board[str(position + 1)] == board[str(position + 2)] != ' ':  # across the top
@@ -120,7 +126,7 @@ while True:
 
         move = input("Enter the Position 1 - 9 : ")
 
-        if board[str(move)] == " ":
+        if validate_input(move) and board[str(move)] == " ":
             board[str(move)] = player_letter
         else:
             continue
